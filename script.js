@@ -10,56 +10,39 @@ function init() {
   sceneInstance.animate();
 
   let loader = new THREE.GLTFLoader();
+  loader.load("./assets/test_montagne.glb", (model) => {
+    if (model) {
+      model.scene.scale.setScalar(0.2);
 
-  loader.load('./assets/shape.gltf', (gltf) => {
-    if (gltf) {
-        gltf.scene.rotation.z = Math.PI / 24;
-        gltf.scene.rotation.y = Math.PI / 12;
-        gltf.scene.position.y = 0.2;
-        gltf.scene.scale.setScalar(0.9);
-        vertices = gltf.scene.children[0].geometry.attributes.position.array;
+      let polygons = model.scene.children[0].children;
+      for (let i = 0; i < polygons.length; i ++) {
+        points(polygons[i].position);
+      };
+      loadedModel = model.scene;
     }
-    loadedModel = gltf.scene;
-    sceneInstance.scene.add(loadedModel);
   });
 
-  const pointsMaterial = new THREE.PointsMaterial( {
-
-    color: 0x0080ff,
-    map: new THREE.TextureLoader().load("./assets/dot.png"),
-    size: 1,
-    alphaTest: 0.5
-
-} );
-
-const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
-
-const points = new THREE.Points( pointsGeometry, pointsMaterial );
-sceneInstance.scene.add( points );
-
-// convex hull
-
-const meshMaterial = new THREE.MeshLambertMaterial( {
-    color: 0xffffff,
-    opacity: 0.5,
-    transparent: true
-} );
-
-const meshGeometry = new THREE.ConvexGeometry( vertices );
-
-const mesh1 = new THREE.Mesh( meshGeometry, meshMaterial );
-mesh1.material.side = THREE.BackSide; // back faces
-mesh1.renderOrder = 0;
-sceneInstance.scene.add( mesh1 );
-
-const mesh2 = new THREE.Mesh( meshGeometry, meshMaterial.clone() );
-mesh2.material.side = THREE.FrontSide; // front faces
-mesh2.renderOrder = 1;
-sceneInstance.scene.add( mesh2 );
-
+  render();
   animate();
-}
 
-function animate() {
-  requestAnimationFrame(animate);
+  function animate() {
+    requestAnimationFrame(animate);
+  }
+
+  function render() {
+    sceneInstance.render();
+  }
+
+  //Points
+  function points(position){
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( position, 3 ));
+    
+    const material = new THREE.PointsMaterial( { color: 0x888888 } );
+    const points = new THREE.Points( geometry, material );
+
+    sceneInstance.scene.add( points );
+
+    animate();
+  }
 }
