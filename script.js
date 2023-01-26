@@ -5,6 +5,7 @@ window.onload = function () {
 let sceneInstance;
 let loadedModel;
 let group;
+let fog;
 
 //Mouse movement
 const mouse = new THREE.Vector2();
@@ -17,6 +18,10 @@ function init() {
   sceneInstance.animate();
 
   group = new THREE.Group();
+
+  // Fog
+  let fog = new THREE.Fog(0x000425, 300, 520);
+  sceneInstance.scene.fog = fog;
 
   let loader = new THREE.GLTFLoader();
   loader.load("./assets/test_IO.gltf", (model) => {
