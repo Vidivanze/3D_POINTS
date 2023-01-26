@@ -39,13 +39,13 @@ function init() {
 }
 
 //Points generation
-function points(position){
+function points(position, i){
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( position, 3 ));
   
-  const material = new THREE.PointsMaterial( { color: 0x888888 } );
-  const point = new THREE.Points( geometry, material );
-
+  const mesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true } );
+  const point = new THREE.Points( geometry, mesh );
+  point.name = "Polygon_"+i
   group.add( point );
 }
 
