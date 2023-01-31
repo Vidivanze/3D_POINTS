@@ -10,6 +10,9 @@ let loadedModel;
 let group;
 let fog;
 
+// Points
+let pointMesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true } );
+
 // Animations
 let mixer;
 let clock;
@@ -78,13 +81,14 @@ function animate() {
 
 //Points generation
 function points(position, i){
-  const geometry = new THREE.BufferGeometry();
+  let geometry = new THREE.BufferGeometry();
   geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( position, 3 ));
 
-  const mesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true } );
-  const point = new THREE.Points( geometry, mesh );
+  let point = new THREE.Points( geometry, pointMesh );
   point.name = "Polygon_"+i
   group.add( point );
+  geometry = null;
+  point = null;
 }
 
 // Points animation
