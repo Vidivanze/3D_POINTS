@@ -1,5 +1,5 @@
 window.onload = function () {
-  init('test_IO_anim.gltf');
+  init();
   animate();
 };
 
@@ -19,6 +19,7 @@ let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 
 
 
 function init(file) {
+  if ( !file ) file = 'test_IO_anim.gltf';
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
   sceneInstance.initialize();
