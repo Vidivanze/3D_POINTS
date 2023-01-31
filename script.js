@@ -5,6 +5,7 @@ window.onload = function () {
 
 // Scene
 let sceneInstance;
+let loader;
 let loadedModel;
 let group;
 let fog;
@@ -20,6 +21,15 @@ let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 
 
 function init(file) {
   if ( !file ) file = 'test_IO_anim.gltf';
+  if(sceneInstance){
+    sceneInstance.scene.remove(sceneInstance.scene.children); 
+  }
+  
+  clock = null;
+  group = null;
+  loader = null;
+  loadedModel = null;
+
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
   sceneInstance.initialize();
@@ -32,7 +42,7 @@ function init(file) {
   sceneInstance.scene.fog = fog;
 
   // Model loader
-  let loader = new THREE.GLTFLoader();
+  loader = new THREE.GLTFLoader();
   loader.load("./assets/"+file, ( model ) => {
     if ( model ) {
       const polygons = model.scene.children[0].children;
