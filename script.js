@@ -70,7 +70,6 @@ function animate() {
     group.rotation.y = THREE.MathUtils.lerp( group.rotation.y, (mouse.x * Math.PI) / 4000, 0.1 );
     if ( mixer ) mixer.update( clock.getDelta());
   }
-
 }
 
 
