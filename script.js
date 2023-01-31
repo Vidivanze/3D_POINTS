@@ -1,5 +1,5 @@
 window.onload = function () {
-  init();
+  init('test_IO_anim.gltf');
   animate();
 };
 
@@ -18,7 +18,7 @@ const mouse = new THREE.Vector2();
 let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
 
 
-function init() {
+function init(file) {
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
   sceneInstance.initialize();
@@ -32,7 +32,7 @@ function init() {
 
   // Model loader
   let loader = new THREE.GLTFLoader();
-  loader.load("./assets/test_IO_anim.gltf", ( model ) => {
+  loader.load("./assets/"+file, ( model ) => {
     if ( model ) {
       const polygons = model.scene.children[0].children;
       // Replace each polygons by a point
