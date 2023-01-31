@@ -18,18 +18,22 @@ let clock;
 const mouse = new THREE.Vector2();
 let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
 
-
-function init(file) {
-  if ( !file ) file = 'test_IO_anim.gltf';
-  if(sceneInstance){
-    sceneInstance.scene.remove.apply(sceneInstance.scene, sceneInstance.scene.children);
-  }
-  
-  clock = null;
+// Change current model and refresh scene and her elements
+function changeModel( file ) {
+  sceneInstance.scene.remove.apply(sceneInstance.scene, sceneInstance.scene.children);
+  sceneInstance = null;
   group = null;
   loader = null;
   loadedModel = false;
+  clock = null;
+  mixer = null;
 
+  init( file );
+}
+
+function init( file ) {
+  if ( !file ) file = 'test_IO_anim.gltf';
+    
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
   sceneInstance.initialize();
@@ -50,10 +54,10 @@ function init(file) {
       for (let i = 0; i < polygons.length; i ++) {
         points(polygons[i].position, i);
       };
-      loadedModel = true;
-      loader = null;
       sceneInstance.scene.add( group );
       group.scale.setScalar(0.5);
+      loadedModel = true;
+      loader = null;
 
       // Load animations
       if( model.animations ) animations( model.animations );
@@ -71,7 +75,6 @@ function animate() {
     if ( mixer ) mixer.update( clock.getDelta());
   }
 }
-
 
 //Points generation
 function points(position, i){
