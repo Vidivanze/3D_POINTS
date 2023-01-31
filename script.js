@@ -22,7 +22,7 @@ let windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 
 function init(file) {
   if ( !file ) file = 'test_IO_anim.gltf';
   if(sceneInstance){
-    sceneInstance.scene.remove(sceneInstance.scene.children); 
+    sceneInstance.scene.remove.apply(sceneInstance.scene, sceneInstance.scene.children);
   }
   
   clock = null;
