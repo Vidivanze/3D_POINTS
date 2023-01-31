@@ -71,7 +71,6 @@ function animate() {
     if ( mixer ) mixer.update( clock.getDelta());
   }
 
-  sceneInstance.render()
 }
 
 
