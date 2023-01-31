@@ -28,7 +28,7 @@ function init(file) {
   clock = null;
   group = null;
   loader = null;
-  loadedModel = null;
+  loadedModel = false;
 
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
@@ -50,8 +50,8 @@ function init(file) {
       for (let i = 0; i < polygons.length; i ++) {
         points(polygons[i].position, i);
       };
-      loadedModel = model.scene;
-
+      loadedModel = true;
+      loader = null;
       sceneInstance.scene.add( group );
       group.scale.setScalar(0.5);
 
