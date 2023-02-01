@@ -6,7 +6,6 @@ window.onload = function () {
 // Scene
 let sceneInstance;
 let loader;
-let loadedModel;
 let group;
 let fog;
 
@@ -59,7 +58,6 @@ function init( file ) {
       };
       sceneInstance.scene.add( group );
       group.scale.setScalar(0.5);
-      loadedModel = true;
       loader = null;
 
       // Load animations
@@ -72,11 +70,10 @@ function init( file ) {
 function animate() {
   requestAnimationFrame(animate);
 
-  if(loadedModel) {
-    group.rotation.x = THREE.MathUtils.lerp( group.rotation.x, (mouse.y * Math.PI) / 3000, 0.1 );
-    group.rotation.y = THREE.MathUtils.lerp( group.rotation.y, (mouse.x * Math.PI) / 4000, 0.1 );
-    if ( mixer ) mixer.update( clock.getDelta());
-  }
+  group.rotation.x = THREE.MathUtils.lerp( group.rotation.x, (mouse.y * Math.PI) / 3000, 0.1 );
+  group.rotation.y = THREE.MathUtils.lerp( group.rotation.y, (mouse.x * Math.PI) / 4000, 0.1 );
+
+  if ( mixer ) mixer.update( clock.getDelta());
 }
 
 //Points generation
@@ -98,6 +95,10 @@ function animations(animations) {
 
   const clip = animations[0];
   const action = mixer.clipAction( clip );
+  
+  action.setLoop(THREE.LoopOnce);
+  action.clampWhenFinished = true;
+  action.enable = true;
   action.play();
 }
 
