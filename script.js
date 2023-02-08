@@ -34,7 +34,7 @@ function changeModel( file ) {
 }
 
 function init( file ) {
-  if ( !file ) file = 'test_IO_anim.gltf';
+  if ( !file ) file = 'test_IO.glb';
 
   // Scene instance elements
   sceneInstance = new SceneInit("myCanvas");
