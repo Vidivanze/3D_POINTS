@@ -96,9 +96,11 @@ function animations(animations) {
   const clip = animations[0];
   const action = mixer.clipAction( clip );
   
-  action.setLoop(THREE.LoopOnce);
+  action.setLoop(THREE.LoopPingPong, 3);
   action.clampWhenFinished = true;
   action.enable = true;
+  action.startAt(2)
+  action.setDuration(3);
   action.play();
 }
 
