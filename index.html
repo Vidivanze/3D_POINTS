@@ -8,19 +8,20 @@
 		</style>
 	</head>
 	<body>
-		<header>
+		<header style="margin-left:100px;">
 			<input type="button" value="Letters" onclick="changeModel('test_IO.glb')">
 			<input type="button" value="Pickle" onclick="changeModel(`PickleHD.glb`)">
 			<input type="button" value="Pickle 2" onclick="changeModel(`Pickle2.glb`)">
 			<input type="button" value="Hard Hat" onclick="changeModel(`hard_hat.glb`)">
 			<input type="button" value="Golf ball" onclick="changeModel(`golf.glb`)">
 		</header>
-		<script src="./node_modules/three/build/three.min.js"></script>	
+		<script src='https://rawcdn.githack.com/mrdoob/three.js/r146/build/three.js'></script>	
+		<script src="https://rawcdn.githack.com/mrdoob/three.js/r146/examples/js/loaders/GLTFLoader.js"></script>
 		<script src="./node_modules/stats.js/build/stats.min.js"></script>
 
 		<script src="lib/SceneInit.js"></script>
 		<script src="script.js"></script>
 		
-		<canvas id="myCanvas"></canvas>
+		<canvas id="myCanvas" style="margin-left: 100px;"></canvas>
 	</body>	
 </html>
