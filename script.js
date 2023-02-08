@@ -10,7 +10,7 @@ let group;
 let fog;
 
 // Points
-let pointMesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true } );
+let pointMesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true , size: 0.7} );
 
 // Animations
 let mixer;
@@ -56,8 +56,8 @@ function init( file ) {
       for (let i = 0; i < polygons.length; i ++) {
         points(polygons[i].position, i);
       };
-      sceneInstance.scene.add( group );
       group.scale.setScalar(0.5);
+      sceneInstance.scene.add( group );
       loader = null;
 
       // Load animations
@@ -69,9 +69,6 @@ function init( file ) {
 
 function animate() {
   requestAnimationFrame(animate);
-
-  group.rotation.x = THREE.MathUtils.lerp( group.rotation.x, (mouse.y * Math.PI) / 3000, 0.1 );
-  group.rotation.y = THREE.MathUtils.lerp( group.rotation.y, (mouse.x * Math.PI) / 4000, 0.1 );
 
   if ( mixer ) mixer.update( clock.getDelta());
 }
@@ -97,10 +94,10 @@ function animations(animations) {
   const action = mixer.clipAction( clip );
   
   action.setLoop(THREE.LoopPingPong, 3);
+  action.startAt(2)
+  action.setDuration(2);
   action.clampWhenFinished = true;
   action.enable = true;
-  action.startAt(2)
-  action.setDuration(3);
   action.play();
 }
 
@@ -108,4 +105,6 @@ function animations(animations) {
 function onMouseMove(event) {
   mouse.x = ( event.clientX - windowHalf.x );
   mouse.y = ( event.clientY - windowHalf.y );
+  group.rotation.x = THREE.MathUtils.lerp( group.rotation.x, (mouse.y * Math.PI) / 3000, 0.1 );
+  group.rotation.y = THREE.MathUtils.lerp( group.rotation.y, (mouse.x * Math.PI) / 4000, 0.1 );
 }
