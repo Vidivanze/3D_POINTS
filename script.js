@@ -10,7 +10,7 @@ let group;
 let fog;
 
 // Points
-let pointMesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true , size: 0.7} );
+let pointMesh = new THREE.PointsMaterial( { color: 0x60BAE9, fog: true , size: 0.7 } );
 
 // Animations
 let mixer;
