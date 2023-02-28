@@ -37,7 +37,7 @@ function init( file ) {
   if ( !file ) file = 'test_IO.glb';
 
   // Scene instance elements
-  sceneInstance = new SceneInit("myCanvas");
+  sceneInstance = new SceneInit("canvas");
   sceneInstance.initialize();
   sceneInstance.animate();
   clock = new THREE.Clock();
@@ -64,7 +64,7 @@ function init( file ) {
       if( model.animations ) animations( model.animations );
     }
   });
-  document.addEventListener( 'mousemove', onMouseMove, false );
+  document.getElementById('canvas').addEventListener( 'mousemove', onMouseMove, false );
 }
 
 function animate() {
